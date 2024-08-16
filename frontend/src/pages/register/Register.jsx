@@ -20,7 +20,7 @@ const Register = () => {
                     <Button label="Cadastrar" className="button"></Button>
                 </div>
                 <div class="flex justify-content-center grid mt-1">
-                    <Button label="Cancelar" size="small" severity="danger" text></Button>
+                    <Button label="Cancelar" link onClick={() => window.location.href = "./login"} size="small" severity="danger" text></Button>
                 </div>
             </Card>
         </div>

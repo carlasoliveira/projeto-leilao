@@ -20,10 +20,10 @@ const Login = () => {
                     <Button label="Entrar" className="button"></Button>
                 </div>
                 <div class="flex justify-content-center grid mt-2">
-                    <Button label="Novo cadastro" size="small" severity="primary" text></Button>
+                    <Button label="Novo cadastro" link onClick={() => window.location.href = "./register"} size="small" severity="primary" text></Button>
                 </div>
                 <div class="flex justify-content-center grid mt-1">
-                    <Button label="Esqueci minha senha" size="small" severity="danger" text></Button>
+                    <Button label="Esqueci minha senha" link onClick={() => window.location.href = "./recover-password"} size="small" severity="danger" text></Button>
                 </div>
             </Card>
         </div>
