@@ -6,11 +6,6 @@
     background-color: #B7D5E5;
 }
 
-.login-container button {
-    display: flexbox;
-    justify-content: center;
-}
-
 .card{
     background-color: #f8f8ea;
     justify-content: center;

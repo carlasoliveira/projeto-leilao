@@ -1,0 +1,12 @@
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Faz com que a div ocupe a altura total da janela */
+    background-color: #B7D5E5;
+}
+
+.card{
+    background-color: #f8f8ea;
+    justify-content: center;
+}
