@@ -23,7 +23,7 @@ const ChangePassword = () => {
                     <Password feedback={false} placeholder="Confirmar senha"/>
                 </div>
                 <div class="flex justify-content-center">
-                    <Button label="Alterar senha" className="button"></Button>
+                    <Button label="Alterar senha" className="button" raised link onClick={() => window.location.href = "./"}></Button>
                 </div>
                 <div class="flex justify-content-center grid mt-1">
                     <Button label="Cancelar" link onClick={() => window.location.href = "./login"} size="small" severity="danger" text></Button>

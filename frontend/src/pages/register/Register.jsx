@@ -17,7 +17,7 @@ const Register = () => {
                     <InputText placeholder="E-mail" />
                 </div>
                 <div class="flex justify-content-center">
-                    <Button label="Cadastrar" className="button"></Button>
+                    <Button label="Cadastrar" className="button" raised link onClick={() => window.location.href = "./"}></Button>
                 </div>
                 <div class="flex justify-content-center grid mt-1">
                     <Button label="Cancelar" link onClick={() => window.location.href = "./login"} size="small" severity="danger" text></Button>

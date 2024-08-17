@@ -17,7 +17,7 @@ const Login = () => {
                     <Password feedback={false} placeholder="Senha"/>
                 </div>
                 <div class="flex justify-content-center">
-                    <Button label="Entrar" className="button"></Button>
+                    <Button label="Entrar" className="button" raised link onClick={() => window.location.href = "./"}></Button>
                 </div>
                 <div class="flex justify-content-center grid mt-2">
                     <Button label="Novo cadastro" link onClick={() => window.location.href = "./register"} size="small" severity="primary" text></Button>
