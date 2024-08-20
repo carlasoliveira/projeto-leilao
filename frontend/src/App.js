@@ -7,13 +7,16 @@ import RecoverPassword from './pages/recoverPassword.jsx/RecoverPassword';
 import ChangePassword from './pages/changePassword/ChangePassword';
 import DefaultLayout from './components/DefaultLayout';
 import SimpleLayout from './components/SimpleLayout';
+import PrivateRouter from './components/PrivateRouter';
 
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<DefaultLayout><Home/></DefaultLayout>}/>
+          <Route element={<PrivateRouter/>}>
+            <Route path='/' element={<DefaultLayout><Home/></DefaultLayout>}/>
+          </Route>
           <Route path='/login' element={<SimpleLayout><Login/></SimpleLayout>}/>
           <Route path='/register' element={<SimpleLayout><Register/></SimpleLayout>}/>
           <Route path='/recover-password' element={<SimpleLayout><RecoverPassword/></SimpleLayout>}/>
