@@ -9,16 +9,20 @@ import { useNavigate } from "react-router-dom";
 
 const Login = () => {
 
-    const [user, setUser] = useState({ email: "", password: ""});
+    const [user, setUser] = useState({ email: "", password: "" });
 
     const navigate = useNavigate();
 
     const handleChange = (input) => {
-        setUser({ ...user, [input.target.name]: input.target.value});
+        setUser({ ...user, [input.target.name]: input.target.value });
     }
 
+    const header = (
+        <img alt="Card" src="/images/img-login.png" />
+    );
+
     const login = () => {
-        if (user.email == "carla@gmail.com" && user.password == "123") {
+        if (user.email == "admin" && user.password == "admin") {
             let token = "token do backend";
             localStorage.setItem("token", token);
             localStorage.setItem("email", user.email);
@@ -31,11 +35,13 @@ const Login = () => {
 
     return (
         <div className="login-container">
-            <Card title="Login" className="card">
+            <Card title="Login" className="card md:w-25rem h-95rem lg:w-25rem h-95rem sm:w-25rem h-95rem" header={header}>
                 <div class="field">
+                    <label htmlFor="email">E-mail</label><br />
                     <InputText onChange={handleChange} name="email" id="email" placeholder="E-mail" />
                 </div>
                 <div class="field">
+                    <label htmlFor="password">Senha</label><br />
                     <Password onChange={handleChange} name="password" id="password" feedback={false} placeholder="Senha" />
                 </div>
                 <div class="flex justify-content-center">
@@ -45,7 +51,7 @@ const Login = () => {
                     <Button label="Novo cadastro" link onClick={() => window.location.href = "./register"} size="small" severity="primary" text></Button>
                 </div>
                 <div class="flex justify-content-center grid mt-1">
-                    <Button label="Esqueci minha senha" link onClick={() => window.location.href = "./recover-password"} size="small" severity="danger" text></Button>
+                    <Button label="Esqueci minha senha" link onClick={() => window.location.href = "./recover-password"} size="small" severity="primary" text></Button>
                 </div>
             </Card>
         </div>

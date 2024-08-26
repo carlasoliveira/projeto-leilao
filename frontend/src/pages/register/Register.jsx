@@ -9,11 +9,13 @@ import { Button } from 'primereact/button';
 const Register = () => {
     return (
         <div className="register-container">
-            <Card title="Novo cadastro" className="card">
+            <Card title="Novo cadastro" className="card md:w-25rem h-95rem lg:w-25rem h-95rem sm:w-25rem h-95rem">
                 <div class="field">
+                    <label htmlFor="name">Nome completo</label><br />
                     <InputText placeholder="Nome" />
                 </div>
                 <div class="field">
+                    <label htmlFor="email">E-mail</label><br />
                     <InputText placeholder="E-mail" />
                 </div>
                 <div class="flex justify-content-center">

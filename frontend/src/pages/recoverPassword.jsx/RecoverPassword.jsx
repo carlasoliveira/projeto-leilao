@@ -8,8 +8,9 @@ import { Button } from 'primereact/button';
 const RecoverPassword = () => {
     return (
         <div className="recover-container">
-            <Card title="Recuperar senha" className="card">
+            <Card title="Recuperar senha" className="card md:w-25rem h-95rem lg:w-25rem h-95rem sm:w-25rem h-95rem">
                 <div class="field">
+                    <label htmlFor="email">E-mail</label><br />
                     <InputText placeholder="E-mail" />
                 </div>
                 <div class="flex justify-content-center">

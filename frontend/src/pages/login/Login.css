@@ -14,4 +14,15 @@
 .button{
     background-color: #3B82F6;
     color: #f8f8ea;
+    width: 100%;
+}
+
+.field {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.field input, .field .p-inputtext, .field .p-password {
+    width: 100%;
+    box-sizing: border-box; /* Inclui padding e border na largura total */
 }
