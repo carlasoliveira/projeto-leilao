@@ -6,9 +6,14 @@ import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
 
 const RecoverPassword = () => {
+
+    const header = (
+        <img alt="Card" src="/images/img-login.png" />
+    );
+    
     return (
         <div className="recover-container">
-            <Card title="Recuperar senha" className="card md:w-25rem h-95rem lg:w-25rem h-95rem sm:w-25rem h-95rem">
+            <Card title="Recuperar senha" className="card md:w-25rem h-95rem lg:w-25rem h-95rem sm:w-25rem h-95rem" header={header}>
                 <div class="field">
                     <label htmlFor="email">E-mail</label><br />
                     <InputText placeholder="E-mail" />
