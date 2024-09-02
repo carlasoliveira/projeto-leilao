@@ -7,14 +7,9 @@ import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
 
 const Register = () => {
-
-    const header = (
-        <img alt="Card" src="/images/img-login.png" />
-    );
-    
     return (
         <div className="register-container">
-            <Card title="Novo cadastro" className="card md:w-25rem h-95rem lg:w-25rem h-95rem sm:w-25rem h-95rem" header={header}>
+            <Card title="Novo cadastro" className="card md:w-25rem h-95rem lg:w-25rem h-95rem sm:w-25rem h-95rem">
                 <div class="field">
                     <label htmlFor="name">Nome completo</label><br />
                     <InputText placeholder="Nome" />

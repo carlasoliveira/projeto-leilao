@@ -9,16 +9,11 @@ import { useState } from 'react';
 import PasswordChecklist from 'react-password-checklist';
 
 const ChangePassword = () => {
-
-    const header = (
-        <img alt="Card" src="/images/img-login.png" />
-    ); 
-    
     const [password, setPassword] = useState("");
     const [passwordAgain, setPasswordAgain] = useState("");
     return (
         <div className="change-container">
-            <Card title="Alterar senha" className="card md:w-25rem h-95rem lg:w-25rem h-95rem sm:w-25rem h-95rem" header={header}>
+            <Card title="Alterar senha" className="card md:w-25rem h-95rem lg:w-25rem h-95rem sm:w-25rem h-95rem">
                 <div class="field">
                     <label htmlFor="email">E-mail</label><br />
                     <InputText placeholder="E-mail" />
