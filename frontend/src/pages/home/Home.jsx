@@ -1,6 +1,6 @@
 import React from "react";
 import './Home.css';
-import Logout from "../../components/logout/logout";
+
 
 const Home = () => {
 return(

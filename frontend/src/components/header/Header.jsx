@@ -9,6 +9,7 @@ const Header = () => {
         {
             label: 'Início',
             icon: 'pi pi-home',
+            url: '/',
         },
         {
             label: 'Leilões',
@@ -17,17 +18,17 @@ const Header = () => {
                 {
                     label: 'Em andamento',
                     icon: 'pi pi-clock',
-                    url: './auctionInProgress',
+                    url: '/auction-in-progress',
                 },
                 {
                     label: 'Próximos',
                     icon: 'pi pi-spinner-dotted',
-                    url: './nextAuction',
+                    url: './next-auction',
                 },
                 {
                     label: 'Encerrados',
                     icon: 'pi pi-check-circle',
-                    url: './AuctionFinished',
+                    url: './finished-auction',
                 }
             ]
         }
