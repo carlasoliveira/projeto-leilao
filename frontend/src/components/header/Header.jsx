@@ -1,6 +1,7 @@
 import React from "react";
 import './Header.css';
 import Logout from "../../components/logout/logout";
+import { Button } from "primereact/button";
 import { Menubar } from 'primereact/menubar';
 
 const Header = () => {
