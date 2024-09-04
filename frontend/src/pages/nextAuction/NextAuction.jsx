@@ -1,4 +1,5 @@
 import React from "react";
+import style from './NextAuction.module.css'
 
 
 const NextAuction = () => {

@@ -1,4 +1,5 @@
 import React from "react";
+import style from './AuctionInProgress.module.css'
 
 const AuctionInProgress = () => {
     return (
