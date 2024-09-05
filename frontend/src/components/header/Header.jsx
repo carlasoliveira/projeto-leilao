@@ -3,6 +3,7 @@ import './Header.css';
 import Logout from "../../components/logout/logout";
 import { Button } from "primereact/button";
 import { Menubar } from 'primereact/menubar';
+import { Avatar } from 'primereact/avatar';
 
 const Header = () => {
     const start = <img alt="logo" src="/images/img-navbar.png" height="40" className="mr-2"></img>;
@@ -37,6 +38,7 @@ const Header = () => {
 
     const end = (
         <div className="flex align-items-center gap-2">
+            <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/onyamalimba.png" shape="circle" />
             <Logout/>
         </div>
     );
