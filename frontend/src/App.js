@@ -12,6 +12,7 @@ import AuctionInProgress from './pages/auctionInProgress/AuctionInProgress';
 import DefaultLayout from './components/DefaultLayout';
 import SimpleLayout from './components/SimpleLayout';
 import PrivateRouter from './components/PrivateRouter';
+import Profile from './pages/profile/Profile';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path='/finished-auction' element={<DefaultLayout><AuctionFinished/></DefaultLayout>}/>
           <Route path='/next-auction' element={<DefaultLayout><NextAuction/></DefaultLayout>}/>
           <Route path='/auction-in-progress' element={<DefaultLayout><AuctionInProgress/></DefaultLayout>}/>
+          <Route path='/profile' element={<DefaultLayout><Profile/></DefaultLayout>}/>
         </Routes>
       </BrowserRouter>
     </>
