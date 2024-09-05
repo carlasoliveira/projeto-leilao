@@ -13,7 +13,7 @@ const Logout = () => {
 
     return(
         <>
-            <Button label="Sair" onClick={logout}/>
+            <Button label="Sair" icon="pi pi-sign-out"  rounded text severity="secondary" aria-label="Sair" onClick={logout}/>
         </>
     );
 }

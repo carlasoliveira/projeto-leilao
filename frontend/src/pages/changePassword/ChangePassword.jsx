@@ -1,5 +1,5 @@
 import React from "react";
-import './ChangePassword.css';
+import style from './ChangePassword.module.css';
 
 import { InputText } from 'primereact/inputtext';
 import { Card } from 'primereact/card';
@@ -12,21 +12,21 @@ const ChangePassword = () => {
     const [password, setPassword] = useState("");
     const [passwordAgain, setPasswordAgain] = useState("");
     return (
-        <div className="change-container">
+        <div className={style.changeContainer}>
             <Card title="Alterar senha" className="card md:w-25rem h-95rem lg:w-25rem h-95rem sm:w-25rem h-95rem">
-                <div class="field">
+                <div class="field" className={style.field}>
                     <label htmlFor="email">E-mail</label><br />
                     <InputText placeholder="E-mail" />
                 </div>
-                <div class="field">
+                <div class="field" className={style.field}>
                     <label htmlFor="code">Código</label><br />
                     <InputText placeholder="Código" />
                 </div>
-                <div class="field">
+                <div class="field" className={style.field}>
                     <label htmlFor="new-password">Nova senha</label><br />
                     <Password value={password} feedback={false} placeholder="Nova senha" onChange={e => setPassword(e.target.value)} />
                 </div>
-                <div class="field">
+                <div class="field" className={style.field}>
                     <label htmlFor="confirm-new-password">Confirmar nova senha</label><br />
                     <Password value={passwordAgain} feedback={false} placeholder="Confirmar nova senha" onChange={e => setPasswordAgain(e.target.value)} />
                 </div>
@@ -44,7 +44,7 @@ const ChangePassword = () => {
                         match: "As senhas são iguais.",
                     }} />
                 <div class="flex justify-content-center grid mt-2">
-                    <Button label="Alterar senha" className="button" raised link onClick={() => window.location.href = "./"}></Button>
+                    <Button label="Alterar senha" className={style.button} raised link onClick={() => window.location.href = "./"}></Button>
                 </div>
                 <div class="flex justify-content-center grid mt-1">
                     <Button label="Cancelar" link onClick={() => window.location.href = "./login"} size="small" severity="danger" text></Button>
