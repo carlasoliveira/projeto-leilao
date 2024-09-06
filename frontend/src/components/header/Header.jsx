@@ -38,7 +38,7 @@ const Header = () => {
 
     const end = (
         <div className="flex align-items-center gap-2">
-            <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/onyamalimba.png" shape="circle" />
+            <Avatar image="/images/img-profile.jpg" shape="circle" onClick={() => window.location.href = "./profile"}/>
             <Logout/>
         </div>
     );
@@ -46,8 +46,6 @@ const Header = () => {
     return (
         <div className="header">
             <Menubar model={items} start={start} end={end}/>
-            
-            <h1>Leilões Administrativos</h1>
         </div> //Deve haver apenas 1 bloco de código
     );
 
