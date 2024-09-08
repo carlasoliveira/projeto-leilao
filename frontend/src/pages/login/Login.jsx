@@ -27,7 +27,7 @@ const Login = () => {
             localStorage.setItem("token", token);
             localStorage.setItem("email", user.email);
             localStorage.setItem("password", user.password);
-            navigate('/');
+            navigate('/profile');
         } else {
             alert("Usuário ou senha inseridos estão incorretos");
         }

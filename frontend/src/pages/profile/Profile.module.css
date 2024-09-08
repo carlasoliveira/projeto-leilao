@@ -1,5 +1,27 @@
-.profileContainer{
+.profileContainer {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    height: 100vh; /* Faz com que a div ocupe a altura total da janela */
+    align-items: center;
+    padding: 50px;
+}
+
+.profilePic {
+    padding-top: 25px;
+    border-radius: 50%;
+}
+
+.button{
+    background-color: #3B82F6;
+    color: #f8f8ea;
+    width: 25%;
+}
+
+.dataContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: left;
+    padding-top: 25px;
+    padding-left: 50px;
 }
