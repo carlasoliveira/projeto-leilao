@@ -5,6 +5,30 @@ import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
 
 const Profile = () => {
+    // Estado para armazenar os dados do usuário
+    const [user, setUser] = useState({
+        name: '',
+        age: '',
+        rg: '',
+        cpf: '',
+        city: '',
+        country: '',
+        phone: '',
+        email: ''
+    });
+
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                const response = await fetch('/archives/userData.json');
+                const data = await response.json();
+                setUser(data);
+            } catch (error) {
+                console.error('Erro ao buscar dados do usuário:', error);
+            }
+        };
+        fetchUserData();
+    }, []);
    
     return (
         <div className={style.profileContainer}> 
@@ -18,19 +42,19 @@ const Profile = () => {
                             <div class='col'>
                                 <div className={style.dataContainer}>
                                     <h1>Dados Pessoais</h1>
-                                    <h2>Nome: Carlo Acutis</h2>
-                                    <h2>Idade: 15 anos</h2>
-                                    <h2>RG: </h2>
-                                    <h2>CPF: </h2>
+                                    <h2>Nome: {user.name}</h2>
+                                    <h2>Idade: {user.age}</h2>
+                                    <h2>RG: {user.rg}</h2>
+                                    <h2>CPF: {user.cpf}</h2>
                                 </div>
                             </div>
                             <div class='col'>
                                 <div className={style.dataContainer}>                                    
                                     <h1>Endereço e contato</h1>
-                                    <h2>Cidade: Londres</h2>
-                                    <h2>País: Inglaterra</h2>
-                                    <h2>Telefone: (44)99999-9999</h2>
-                                    <h2>Email: carloacutis@gmail.com</h2>
+                                    <h2>Cidade: {user.city}</h2>
+                                    <h2>País: {user.country}</h2>
+                                    <h2>Telefone: {user.phone}</h2>
+                                    <h2>Email: {user.email}</h2>
                                 </div>
                             </div>
                         </div>
