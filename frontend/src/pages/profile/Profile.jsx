@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import style from './Profile.module.css';
 import { Image } from 'primereact/image';
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
+import { Dialog } from 'primereact/dialog';
+import { InputText } from 'primereact/inputtext';
 
 const Profile = () => {
-    // Estado para armazenar os dados do usuário
+    
     const [user, setUser] = useState({
         name: '',
-        age: '',
         rg: '',
         cpf: '',
         city: '',
@@ -17,21 +18,63 @@ const Profile = () => {
         email: ''
     });
 
+    const [visible, setVisible] = useState(false);
+
+    const nameRef = useRef(null);
+    const rgRef = useRef(null);
+    const cpfRef = useRef(null);
+    const cityRef = useRef(null);
+    const countryRef = useRef(null);
+    const phoneRef = useRef(null);
+    const emailRef = useRef(null);
+
     useEffect(() => {
-        const fetchUserData = async () => {
-            try {
-                const response = await fetch('/archives/userData.json');
-                const data = await response.json();
-                setUser(data);
-            } catch (error) {
-                console.error('Erro ao buscar dados do usuário:', error);
-            }
-        };
-        fetchUserData();
+        const storedUserData = localStorage.getItem('userData');
+        if (storedUserData) {
+            setUser(JSON.parse(storedUserData));
+        } else {
+            const fetchUserData = async () => {
+                try {
+                    const response = await fetch('/archives/userData.json');
+                    const data = await response.json();
+                    setUser(data);
+                } catch (error) {
+                    console.error('Erro ao buscar dados do usuário:', error);
+                }
+            };
+            fetchUserData();
+        }
     }, []);
-   
+
+    const saveChanges = () => {
+        
+        const updatedUser = {
+            name: nameRef.current.value,
+            rg: rgRef.current.value,
+            cpf: cpfRef.current.value,
+            city: cityRef.current.value,
+            country: countryRef.current.value,
+            phone: phoneRef.current.value,
+            email: emailRef.current.value
+        };
+
+        setUser(updatedUser);
+        setVisible(false);
+
+        localStorage.setItem('userData', JSON.stringify(updatedUser));
+    };
+
+
+
+    const footerContent = (
+        <div>
+            <Button label="Cancelar" icon="pi pi-times" onClick={() => setVisible(false)} className="p-button-text" />
+            <Button label="Confirmar" icon="pi pi-check" onClick={saveChanges} autoFocus />
+        </div>
+    );
+
     return (
-        <div className={style.profileContainer}> 
+        <div className={style.profileContainer}>
             <Card className="card md:w-60rem h-65rem lg:w-60rem h-65rem">
                 <div class='grid'>
                     <div class='col-12 flex justify-content-center'>
@@ -43,13 +86,12 @@ const Profile = () => {
                                 <div className={style.dataContainer}>
                                     <h1>Dados Pessoais</h1>
                                     <h2>Nome: {user.name}</h2>
-                                    <h2>Idade: {user.age}</h2>
                                     <h2>RG: {user.rg}</h2>
                                     <h2>CPF: {user.cpf}</h2>
                                 </div>
                             </div>
                             <div class='col'>
-                                <div className={style.dataContainer}>                                    
+                                <div className={style.dataContainer}>
                                     <h1>Endereço e contato</h1>
                                     <h2>Cidade: {user.city}</h2>
                                     <h2>País: {user.country}</h2>
@@ -59,7 +101,22 @@ const Profile = () => {
                             </div>
                         </div>
                     </div>
-                    <Button className={style.button} label="Editar" icon="pi pi-pen-to-square"></Button>
+                    <Button className={style.button} label="Editar" icon="pi pi-pen-to-square" onClick={() => setVisible(true)}></Button>
+                    <Dialog header="Editar informações" visible={visible} style={{ width: '50vw' }} onHide={() => setVisible(false)} footer={footerContent}>
+                        <div className='grid'>
+                            <div className='col'>
+                                <InputText className={style.field} defaultValue={user.name} ref={nameRef} placeholder="Nome" />
+                                <InputText className={style.field} defaultValue={user.rg} ref={rgRef} placeholder="RG" />
+                                <InputText className={style.field} defaultValue={user.cpf} ref={cpfRef} placeholder="CPF" />
+                            </div>
+                            <div className='col'>
+                                <InputText className={style.field} defaultValue={user.city} ref={cityRef} placeholder="Cidade" />
+                                <InputText className={style.field} defaultValue={user.country} ref={countryRef} placeholder="País" />
+                                <InputText className={style.field} defaultValue={user.phone} ref={phoneRef} placeholder="Telefone" />
+                                <InputText className={style.field} defaultValue={user.email} ref={emailRef} placeholder="E-mail" />
+                            </div>
+                        </div>
+                    </Dialog>
                 </div>
             </Card>
 
