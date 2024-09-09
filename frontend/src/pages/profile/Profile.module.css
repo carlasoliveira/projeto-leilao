@@ -1,0 +1,38 @@
+.profileContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+}
+
+.profilePic {
+    padding-top: 25px;
+    border-radius: 50%;
+}
+
+.button{
+    background-color: #3B82F6;
+    color: #f8f8ea;
+    width: auto;
+    margin-left: 50px;
+}
+
+.dataContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: left;
+    padding-top: 25px;
+    padding-left: 50px;
+}
+
+.field {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.field input, .field .p-inputtext {
+    width: 100%;
+    box-sizing: border-box; /* Inclui padding e border na largura total */
+}

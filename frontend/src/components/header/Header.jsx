@@ -3,6 +3,7 @@ import './Header.css';
 import Logout from "../../components/logout/logout";
 import { Button } from "primereact/button";
 import { Menubar } from 'primereact/menubar';
+import { Avatar } from 'primereact/avatar';
 
 const Header = () => {
     const start = <img alt="logo" src="/images/img-navbar.png" height="40" className="mr-2"></img>;
@@ -37,6 +38,7 @@ const Header = () => {
 
     const end = (
         <div className="flex align-items-center gap-2">
+            <Avatar image="/images/img-profile.jpg" shape="circle" onClick={() => window.location.href = "./profile"}/>
             <Logout/>
         </div>
     );
@@ -44,8 +46,6 @@ const Header = () => {
     return (
         <div className="header">
             <Menubar model={items} start={start} end={end}/>
-            
-            <h1>Leilões Administrativos</h1>
         </div> //Deve haver apenas 1 bloco de código
     );
 
