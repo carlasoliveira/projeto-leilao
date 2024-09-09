@@ -1,6 +1,6 @@
 import React from "react";
 import style from './AuctionInProgress.module.css'
-import BasicDemo from "../../components/AuctionsList";
+import BasicDemo from "../../components/ItemsList";
 import { Card } from 'primereact/card';
 const AuctionInProgress = () => {
     return (
