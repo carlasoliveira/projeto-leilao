@@ -1,14 +1,21 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Chart } from 'primereact/chart';
 
 export default function DoughnutChartDemo() {
     const [chartData, setChartData] = useState({});
     const [chartOptions, setChartOptions] = useState({});
-
+    const {t} = useTranslation();
+    const labels = {
+        vehicles : t('vehicle'),
+        computerEquipment : t('computerEquipment'),
+        furniture : t('furniture'),
+        others : t('others')
+    }
     useEffect(() => {
         const documentStyle = getComputedStyle(document.documentElement);
         const data = {
-            labels: ['Veículos', 'Equipamentos de informática', 'Mobiliário', 'Outros'],
+            labels: [labels.vehicles, labels.computerEquipment, labels.furniture, labels.others],
             datasets: [
                 {
                     data: [90, 35, 20, 15],
@@ -33,9 +40,6 @@ export default function DoughnutChartDemo() {
             animation: {
                 duration: 0
             },
-            hover: {
-                animationDuration: 0,
-            },
             responsiveAnimationDuration: 0,
         };
         
@@ -44,7 +48,7 @@ export default function DoughnutChartDemo() {
     }, []);
 
     return (
-        <div className="card">
+        <div className="card flex justify-content-center">
             <Chart type="doughnut" data={chartData} options={chartOptions} className="w-full md:w-30rem" />
         </div>
     )
