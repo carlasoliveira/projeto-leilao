@@ -1,9 +1,12 @@
 import { Button } from "primereact/button";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const Logout = () => {
     const navigate = useNavigate();
+
+    const {t} = useTranslation();
 
     const logout = () => {
         localStorage.removeItem("token");
@@ -13,7 +16,7 @@ const Logout = () => {
 
     return(
         <>
-            <Button label="Sair" icon="pi pi-sign-out"  rounded text severity="secondary" aria-label="Sair" onClick={logout}/>
+            <Button label={t('logout')} icon="pi pi-sign-out"  rounded text severity="secondary" aria-label="Sair" onClick={logout}/>
         </>
     );
 }

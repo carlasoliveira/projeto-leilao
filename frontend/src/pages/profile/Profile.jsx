@@ -5,6 +5,7 @@ import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
+import { useTranslation } from 'react-i18next';
 
 const Profile = () => {
     
@@ -17,6 +18,8 @@ const Profile = () => {
         phone: '',
         email: ''
     });
+
+    const {t} = useTranslation();
 
     const [visible, setVisible] = useState(false);
 
@@ -68,8 +71,8 @@ const Profile = () => {
 
     const footerContent = (
         <div>
-            <Button label="Cancelar" icon="pi pi-times" onClick={() => setVisible(false)} className="p-button-text" />
-            <Button label="Confirmar" icon="pi pi-check" onClick={saveChanges} autoFocus />
+            <Button label={t('button.cancel')}icon="pi pi-times" onClick={() => setVisible(false)} className="p-button-text" />
+            <Button label={t('button.confirm')} icon="pi pi-check" onClick={saveChanges} autoFocus />
         </div>
     );
 
@@ -84,25 +87,25 @@ const Profile = () => {
                         <div class='grid'>
                             <div class='col'>
                                 <div className={style.dataContainer}>
-                                    <h1>Dados Pessoais</h1>
-                                    <h2>Nome: {user.name}</h2>
-                                    <h2>RG: {user.rg}</h2>
-                                    <h2>CPF: {user.cpf}</h2>
+                                    <h1>{t('personalData')}</h1>
+                                    <h2>{t('name')}: {user.name}</h2>
+                                    <h2>{t('rg')}: {user.rg}</h2>
+                                    <h2>{t('cpf')}: {user.cpf}</h2>
                                 </div>
                             </div>
                             <div class='col'>
                                 <div className={style.dataContainer}>
-                                    <h1>Endereço e contato</h1>
-                                    <h2>Cidade: {user.city}</h2>
-                                    <h2>País: {user.country}</h2>
-                                    <h2>Telefone: {user.phone}</h2>
-                                    <h2>Email: {user.email}</h2>
+                                    <h1>{t('address')}</h1>
+                                    <h2>{t('city')}: {user.city}</h2>
+                                    <h2>{t('country')}: {user.country}</h2>
+                                    <h2>{t('phone')}: {user.phone}</h2>
+                                    <h2>{t('email')}: {user.email}</h2>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <Button className={style.button} label="Editar" icon="pi pi-pen-to-square" onClick={() => setVisible(true)}></Button>
-                    <Dialog header="Editar informações" visible={visible} style={{ width: '50vw' }} onHide={() => setVisible(false)} footer={footerContent}>
+                    <Button className={style.button} label={t('button.edit')} icon="pi pi-pen-to-square" onClick={() => setVisible(true)}></Button>
+                    <Dialog header={t('editInfos')} visible={visible} style={{ width: '50vw' }} onHide={() => setVisible(false)} footer={footerContent}>
                         <div className='grid'>
                             <div className='col'>
                                 <InputText className={style.field} defaultValue={user.name} ref={nameRef} placeholder="Nome" />
