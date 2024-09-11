@@ -108,15 +108,22 @@ const Profile = () => {
                     <Dialog header={t('editInfos')} visible={visible} style={{ width: '50vw' }} onHide={() => setVisible(false)} footer={footerContent}>
                         <div className='grid'>
                             <div className='col'>
-                                <InputText className={style.field} defaultValue={user.name} ref={nameRef} placeholder="Nome" />
-                                <InputText className={style.field} defaultValue={user.rg} ref={rgRef} placeholder="RG" />
-                                <InputText className={style.field} defaultValue={user.cpf} ref={cpfRef} placeholder="CPF" />
+                            <label htmlFor="name">{t('fullName')}</label><br />  
+                                <InputText className={style.field} defaultValue={user.name} ref={nameRef} placeholder={t('fullName')} />
+                                <label htmlFor="rg">{t('rg')}</label><br />
+                                <InputText className={style.field} defaultValue={user.rg} ref={rgRef} placeholder={t('rg')} />
+                                <label htmlFor="cpf">{t('cpf')}</label><br />
+                                <InputText className={style.field} defaultValue={user.cpf} ref={cpfRef} placeholder={t('cpf')} />
                             </div>
                             <div className='col'>
-                                <InputText className={style.field} defaultValue={user.city} ref={cityRef} placeholder="Cidade" />
-                                <InputText className={style.field} defaultValue={user.country} ref={countryRef} placeholder="País" />
-                                <InputText className={style.field} defaultValue={user.phone} ref={phoneRef} placeholder="Telefone" />
-                                <InputText className={style.field} defaultValue={user.email} ref={emailRef} placeholder="E-mail" />
+                                <label htmlFor="city">{t('city')}</label><br />
+                                <InputText className={style.field} defaultValue={user.city} ref={cityRef} placeholder={t('city')} />
+                                <label htmlFor="country">{t('country')}</label><br />
+                                <InputText className={style.field} defaultValue={user.country} ref={countryRef} placeholder={t('country')} />
+                                <label htmlFor="phone">{t('phone')}</label><br />
+                                <InputText className={style.field} defaultValue={user.phone} ref={phoneRef} placeholder={t('phone')} />
+                                <label htmlFor="email">{t('email')}</label><br />
+                                <InputText className={style.field} defaultValue={user.email} ref={emailRef} placeholder={t('email')} />
                             </div>
                         </div>
                     </Dialog>
