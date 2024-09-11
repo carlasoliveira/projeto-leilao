@@ -46,5 +46,6 @@
     "furniture": "Furnitures",
     "others": "Others",
     "english": "English",
-    "portuguese": "Portuguese"
+    "portuguese": "Portuguese",
+    "cep": "CEP"
 }
