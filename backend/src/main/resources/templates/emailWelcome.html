@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="template.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #F0F1F2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            justify-content: center;
+            align-items: center;
+        }
+        h1 {
+            color: #739CBF;
+        }
+        p {
+            color: #333;
+            font-size: 20px;
+        }
+        img {
+            width: 50%;
+            heigth: 50%
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Cadastro efetuado com sucesso</h1>
+        <img src="https://raw.githubusercontent.com/carlasoliveira/projeto-leilao/refs/heads/main/frontend/public/images/img-login.png">
+        <p>Olá, <span th:text="${name}"></span></p>
+        <p>Seja bem-vindo ao nosso portal de leilões adminstrativos. Aproveite todas as funcionalidades do nosso sistema.</p>
+    </div>
+</body>
+</html>
