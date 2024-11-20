@@ -6,13 +6,14 @@ import { Card } from 'primereact/card';
 import { Password } from 'primereact/password';
 import { Button } from 'primereact/button';
 import { useNavigate } from "react-router-dom";
+import PersonService from "../../service/PersonService";
 
 const Login = () => {
 
     const [user, setUser] = useState({ email: "", password: "" });
     const {t} = useTranslation();
     const navigate = useNavigate();
-
+    const personService = new PersonService();
     const handleChange = (input) => {
         setUser({ ...user, [input.target.name]: input.target.value });
     }
@@ -21,20 +22,23 @@ const Login = () => {
         <img alt="Card" src="/images/img-login.png" />
     );
 
-    const login = () => {
-        if (user.email == "admin" && user.password == "admin") {
-            let token = "token do backend";
+    const login = async () => {
+        try {
+            const response = await personService.login(user);
+            let token = response.token;
             localStorage.setItem("token", token);
             localStorage.setItem("email", user.email);
             localStorage.setItem("password", user.password);
             navigate('/profile');
-        } else {
-            alert("Usuário ou senha inseridos estão incorretos");
+        } catch (err){
+            console.log(err);
+            alert("Usuário ou senha estão incorretos");
         }
     }
 
     return (
         <div className={style.loginContainer}>
+            {user.email}
             <Card title={t('login')} className="card md:w-25rem h-95rem lg:w-25rem h-95rem sm:w-25rem h-95rem" header={header}>
                 <div class="field" className={style.field}>
                     <label htmlFor="email">{t('email')}</label><br />

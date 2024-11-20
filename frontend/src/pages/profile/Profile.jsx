@@ -6,6 +6,9 @@ import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
 import { useTranslation } from 'react-i18next';
+import { Divider } from 'primereact/divider';
+import { InputMask } from 'primereact/inputmask';
+import { cpf } from 'cpf-cnpj-validator';
 
 const Profile = () => {
 
@@ -85,7 +88,18 @@ const Profile = () => {
         localStorage.setItem('userData', JSON.stringify(updatedUser));
     };
 
-
+    const [cpfValue, setCpfValue] = useState(user.cpf);
+    const [cpfError, setCpfError] = useState('');
+    
+    const handleCpfChange = (e) => {
+        const value = e.target.value;
+        setCpfValue(value);
+        if (cpf.isValid(value)) {
+            setCpfError('');
+        } else {
+            setCpfError('CPF inválido');
+        }
+    };
 
     const footerContent = (
         <div>
@@ -111,6 +125,7 @@ const Profile = () => {
                                     <h2>{t('cpf')}: {user.cpf}</h2>
                                 </div>
                             </div>
+                            <Divider layout="vertical" />
                             <div class='col'>
                                 <div className={style.dataContainer}>
                                     <h1>{t('address')}</h1>
@@ -129,21 +144,20 @@ const Profile = () => {
                             <div className='col'>
                                 <InputText className={style.field} defaultValue={user.name} ref={nameRef} placeholder="Nome" />
                                 <InputText className={style.field} defaultValue={user.rg} ref={rgRef} placeholder="RG" />
-                                <InputText className={style.field} defaultValue={user.cpf} ref={cpfRef} placeholder="CPF" />
+                                <InputMask className={style.field} defaultValue={user.cpf} ref={cpfRef} mask="999.999.999-99" placeholder="CPF" /> <p></p>
+                                {cpfError && <small className="p-error">{cpfError}</small>}
                             </div>
                             <div className='col'>
-                                <InputText className={style.field} defaultValue={user.cep} ref={cepRef} placeholder={t('cep')} id="cep" onChange={(e) => { setCEP(e.target.value); handleChangeCEP(e) }} />
+                                <InputText className={style.field} defaultValue={user.cep} ref={cepRef} mask="99999-999" placeholder={t('cep')} id="cep" onChange={(e) => { setCEP(e.target.value); handleChangeCEP(e) }} />
                                 <InputText className={style.field} defaultValue={user.city} ref={cityRef} placeholder="Cidade" />
                                 <InputText className={style.field} defaultValue={user.country} ref={countryRef} placeholder="País" />
-                                <InputText className={style.field} defaultValue={user.phone} ref={phoneRef} placeholder="Telefone" />
+                                <InputMask className={style.field} defaultValue={user.phone} ref={phoneRef} mask="(99)99999-9999" placeholder="Telefone" />
                                 <InputText className={style.field} defaultValue={user.email} ref={emailRef} placeholder="E-mail" />
                             </div>
                         </div>
                     </Dialog>
                 </div>
             </Card>
-
-
         </div> //Deve haver apenas 1 bloco de código
     );
 }
