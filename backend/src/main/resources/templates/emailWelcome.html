@@ -34,11 +34,15 @@
     </style>
 </head>
 <body>
+    {var}
     <div class="container">
         <h1>Cadastro efetuado com sucesso</h1>
         <img src="https://raw.githubusercontent.com/carlasoliveira/projeto-leilao/refs/heads/main/frontend/public/images/img-login.png">
         <p>Olá, <span th:text="${name}"></span></p>
         <p>Seja bem-vindo ao nosso portal de leilões adminstrativos. Aproveite todas as funcionalidades do nosso sistema.</p>
+        <p>Para começar a utilizá-lo, confirme seu cadastro por meio do botão abaixo.</p>
+        <a href="http://localhost:3000/confirm-user?email="+<span th:text="${email}"></span> class="button">Acessar sistema</a>
     </div>
+    <!--http://localhost:3000//api/person/-->
 </body>
 </html>

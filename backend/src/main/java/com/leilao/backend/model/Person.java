@@ -1,7 +1,9 @@
 package com.leilao.backend.model;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -52,6 +54,9 @@ public class Person implements UserDetails {
 
     private String email;
 
+    @Column(name="status")
+    private Boolean status = false;
+
     @JsonIgnore
     private Integer validationCode;
 
@@ -71,7 +76,7 @@ public class Person implements UserDetails {
         this.password = passwordEncoder.encode(password);
     }
 
-    @OneToMany(mappedBy = "person", orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "person", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @Setter(value = AccessLevel.NONE)
 
     private List<PersonProfile> personProfile;

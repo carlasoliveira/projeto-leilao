@@ -6,12 +6,19 @@ import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
 import { Password } from 'primereact/password';
 import { Divider } from 'primereact/divider';
+import PersonService from "../../service/PersonService";
+import { useNavigate } from "react-router-dom";
 
 const ChangePassword = () => {
     const { t } = useTranslation();
+    const navigate = useNavigate();
+    const personService = new PersonService();
     const [password, setPassword] = useState("");
     const [passwordAgain, setPasswordAgain] = useState("");
     const [passwordError, setPasswordError] = useState("");
+    const [email, setEmail] = useState("");
+    const [validationCode, setValidationCode] = useState("");
+
 
     const header = <div className="font-bold mb-3">Insira a sua senha:</div>;
     const footer = (
@@ -35,16 +42,31 @@ const ChangePassword = () => {
         }
     };
 
+    const change = async () => {
+        try {
+            validatePasswords();
+            await personService.changePassword({email,validationCode,password});
+            navigate('/login');
+        } catch (err){
+            console.log(err);
+            alert("Informações incorretas")
+        }
+    }
+
     return (
         <div className={style.changeContainer}>
             <Card title={t('changePassword')} className="card md:w-25rem h-95rem lg:w-25rem h-95rem sm:w-25rem h-95rem">
                 <div className={style.field}>
                     <label htmlFor="email">{t('email')}</label><br />
-                    <InputText placeholder={t('email')} />
+                    <InputText 
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder={t('email')} />
                 </div>
                 <div className={style.field}>
                     <label htmlFor="code">{t('code')}</label><br />
-                    <InputText placeholder={t('code')} />
+                    <InputText
+                    onChange={(e) => setValidationCode(e.target.value)}
+                    placeholder={t('code')} />
                 </div>
                 <div className={style.field}>
                     <label htmlFor="new-password">{t('newPassword')}</label><br />
@@ -75,7 +97,7 @@ const ChangePassword = () => {
                     /> <p></p>
                     {passwordError && <small className="p-error">{passwordError}</small>}
                 </div>
-                <Button label="Salvar" icon="pi pi-check" onClick={() => validatePasswords()} />
+                <Button label="Salvar" icon="pi pi-check" onClick={change} />
             </Card>
         </div>
     );

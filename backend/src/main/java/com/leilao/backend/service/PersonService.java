@@ -1,6 +1,7 @@
 package com.leilao.backend.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -10,10 +11,14 @@ import org.thymeleaf.context.Context;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Random;
 
+import com.leilao.backend.exception.InvalidPasswordException;
+import com.leilao.backend.exception.UserNotFoundException;
+import com.leilao.backend.model.ConfirmUserDTO;
 import com.leilao.backend.model.Person;
 import com.leilao.backend.model.PersonAuthRequestDTO;
 import com.leilao.backend.model.PersonAuthResponseDTO;
@@ -34,6 +39,7 @@ public class PersonService implements UserDetailsService {
         Person personSaved = personRepository.save(person);
         Context context = new Context(); // Classe do Spring para manipular o contexto da aplicação
         context.setVariable("name", personSaved.getName()); // Adiciona uma variável ao contexto
+        context.setVariable("email", person.getEmail());
         try {
             emailService.sendTemplateEmail(personSaved.getEmail(), "Cadastro realizado com sucesso", context,
                     "emailWelcome");
@@ -56,8 +62,8 @@ public class PersonService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 
-    public String passwordCodeRequest(PersonAuthRequestDTO personPasswordRequestDTO) throws MessagingException {
-        Optional<Person> person = personRepository.findByEmail(personPasswordRequestDTO.getEmail());
+    public String passwordCodeRequest(String email) throws MessagingException {
+        Optional<Person> person = personRepository.findByEmail(email);
         if (person != null) {
             Person personDatabase = person.get();
             Random random = new Random();
@@ -97,13 +103,15 @@ public class PersonService implements UserDetailsService {
         }
     }
 
-    public String confirmUser(Integer tokenValidation) {
-        Optional<Person> person = personRepository.findByValidationCode(tokenValidation);
-        Person personDatabase = person.get();
-        
-        personDatabase.setValidationCode(tokenValidation);
-        personRepository.save(personDatabase);
-        return "aa";
+    public String confirmUser(String email) throws MessagingException{
+        Optional<Person> personEmail = personRepository.findByEmail(email);
+        if (personEmail.isEmpty()){
+            return ">>>>>>>> deu ruim";
+        }
+        Person personValidation = personEmail.get();
+        personValidation.setStatus(true);
+        personRepository.save(personValidation);
+        return ">>>>>>>> deu bom";
     }
 
 }

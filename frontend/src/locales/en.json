@@ -47,5 +47,13 @@
     "others": "Others",
     "english": "English",
     "portuguese": "Portuguese",
-    "cep": "CEP"
+    "cep": "CEP",
+    "confirmMessage": "Confirm your e-mail",
+    "confirmMessageText": "We have sent a confirmation e-mail to the address you provided. Access it to confirm your registration, follow the instructions and then you will have access to our platform.",
+    "confirmMessageRecover": "We have sent you an e-mail with a code to recover your password. Check your inbox and follow the instructions to proceed with the recovery.",
+    "error": {
+        "incorrectPassword": "Senha incorreta.",
+        "emailNotRegistered": "Email não está cadastrado.",
+        "generalError": "Ocorreu um erro. Tente novamente."
+    }
 }

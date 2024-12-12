@@ -1,9 +1,15 @@
 package com.leilao.backend.controller;
 
+import java.net.URI;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.leilao.backend.model.ConfirmUserDTO;
 import com.leilao.backend.model.Person;
 import com.leilao.backend.model.PersonAuthRequestDTO;
 import com.leilao.backend.model.PersonUpdateDTO;
@@ -56,8 +63,9 @@ public class PersonController {
     }
 
     @PostMapping("/password-code-request")
-    public String passwordCodeRequest(@RequestBody PersonAuthRequestDTO person) throws MessagingException{
-        return personService.passwordCodeRequest(person);
+    public String passwordCodeRequest(@RequestBody Map<String, String> person) throws MessagingException{
+        System.err.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+person.get("email"));
+        return personService.passwordCodeRequest(person.get("email"));
     }
 
     @PutMapping("/change-password")
@@ -65,8 +73,24 @@ public class PersonController {
         return personService.changePassword(person);
     }
 
-    /*@GetMapping("/confirm-user")
-    public String confirmUser (@RequestParam String tokenValidation){
-        return personService.confirmUser(tokenValidation);
-    }*/
+    @GetMapping("/validate-user")
+    public String validateUser(@RequestBody Map<String, String> person) throws MessagingException{
+        return personService.confirmUser(person.get("email"));
+    }
+
 }
+/*try {
+            boolean isValid = personService.confirmUser(email);
+            if (isValid) {
+                // Redirect to the success page
+                return ResponseEntity.status(HttpStatus.OK).location(URI.create("http://localhost:8080/api/person/login")).build();
+            } else {
+                // Redirect to the failure page
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .location(URI.create("http://localhost:8080/api/person/err"))
+                        .build();
+            }
+        } catch (UsernameNotFoundException ex) {
+            // Redirect to the failure page if email is not found
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).location(URI.create("http://localhost:8080/api/person/err")).build();
+        }*/

@@ -1,7 +1,7 @@
 {
     "login": "Entrar",
-    "password":"Senha",
-    "email":"E-mail",
+    "password": "Senha",
+    "email": "E-mail",
     "portal": "Leilões Administrativos",
     "profile": "Perfil",
     "logout": "Sair",
@@ -40,12 +40,20 @@
     "phone": "Telefone",
     "personalData": "Dados pessoais",
     "address": "Endereço e contato",
-    "editInfos" : "Editar informações",
+    "editInfos": "Editar informações",
     "vehicle": "Veículos",
     "computerEquipment": "Equipamentos de informática",
     "furniture": "Mobiliário",
     "others": "Outros",
     "english": "Inglês",
     "portuguese": "Português",
-    "cep": "CEP"
+    "cep": "CEP",
+    "confirmMessage": "Confirme seu e-mail",
+    "confirmMessageText": "Enviamos um e-mail de confirmação para o endereço informado. Acesse-o para confirmar o seu cadastro, siga as instruções e, em seguida, você terá acesso à nossa plataforma.",
+    "confirmMessageRecover": "Enviamos um e-mail com um código para a recuperação da sua senha. Verifique sua caixa de entrada e siga as instruções para prosseguir com a recuperação.",
+    "error": {
+        "incorrectPassword": "Senha incorreta.",
+        "emailNotRegistered": "Email não está cadastrado.",
+        "generalError": "Ocorreu um erro. Tente novamente."
+    }
 }

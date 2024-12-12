@@ -17,6 +17,7 @@ const Login = () => {
     const handleChange = (input) => {
         setUser({ ...user, [input.target.name]: input.target.value });
     }
+    const [errorMessage, setErrorMessage] = useState("");
 
     const header = (
         <img alt="Card" src="/images/img-login.png" />
@@ -25,20 +26,24 @@ const Login = () => {
     const login = async () => {
         try {
             const response = await personService.login(user);
-            let token = response.token;
-            localStorage.setItem("token", token);
+            
+            localStorage.setItem("token", response);
             localStorage.setItem("email", user.email);
-            localStorage.setItem("password", user.password);
+            //localStorage.setItem("password", user.password);
             navigate('/profile');
         } catch (err){
-            console.log(err);
-            alert("Usuário ou senha estão incorretos");
+            if (err.response && err.response.status === 401) {
+                setErrorMessage(t("error.incorrectPassword"));
+            } else if (err.response && err.response.status === 404) {
+                setErrorMessage(t("error.emailNotRegistered"));
+            } else {
+                setErrorMessage(t("error.generalError"));
+            }
         }
     }
 
     return (
         <div className={style.loginContainer}>
-            {user.email}
             <Card title={t('login')} className="card md:w-25rem h-95rem lg:w-25rem h-95rem sm:w-25rem h-95rem" header={header}>
                 <div class="field" className={style.field}>
                     <label htmlFor="email">{t('email')}</label><br />

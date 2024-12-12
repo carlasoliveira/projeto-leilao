@@ -1,6 +1,5 @@
-import React from "react";
+import React, {useState} from "react";
 import style from './Register.module.css';
-
 import { InputText } from 'primereact/inputtext';
 import { Card } from 'primereact/card';
 import { Password } from 'primereact/password';
@@ -13,6 +12,7 @@ const Register = () => {
 
     const [user, setUser] = useState({ name:"", email: "", password: "" });
     const { t } = useTranslation();
+    const navigate = useNavigate();
     const personService = new PersonService();
     const handleChange = (input) => {
         setUser({ ...user, [input.target.name]: input.target.value });
@@ -20,12 +20,14 @@ const Register = () => {
 
     const register = async () => {
         try {
+            
             const response = await personService.insert(user);
+            console.log(response)
             let token = response.token;
             localStorage.setItem("token", token);
             localStorage.setItem("email", user.email);
             localStorage.setItem("password", user.password);
-            navigate('');
+            window.location.href = "./register-confirm";
         } catch (err){
             console.log(err);
             alert("Insira todas as informações corretamente!");

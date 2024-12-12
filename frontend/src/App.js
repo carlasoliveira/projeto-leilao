@@ -13,6 +13,10 @@ import DefaultLayout from './components/DefaultLayout';
 import SimpleLayout from './components/SimpleLayout';
 import PrivateRouter from './components/PrivateRouter';
 import Profile from './pages/profile/Profile';
+import RegisterMessage from './pages/registerMessage/RegisterMessage';
+import Category from './pages/category/Category';
+import Auction from './pages/auction/Auction';
+import RecoverMessage from './pages/recoverMessage/RecoverMessage';
 
 function App() {
   return (
@@ -30,6 +34,11 @@ function App() {
           <Route path='/next-auction' element={<DefaultLayout><NextAuction/></DefaultLayout>}/>
           <Route path='/auction-in-progress' element={<DefaultLayout><AuctionInProgress/></DefaultLayout>}/>
           <Route path='/profile' element={<DefaultLayout><Profile/></DefaultLayout>}/>
+          <Route path='/register-confirm' element={<SimpleLayout><RegisterMessage/></SimpleLayout>}/>
+          <Route path='/recover-confirm' element={<SimpleLayout><RecoverMessage/></SimpleLayout>}/>
+          <Route path='/category' element={<DefaultLayout><Category/></DefaultLayout>}/>
+          <Route path='/auction' element={<DefaultLayout><Auction/></DefaultLayout>}/>
+          
         </Routes>
       </BrowserRouter>
     </>
