@@ -6,30 +6,39 @@ import { Card } from 'primereact/card';
 import { Password } from 'primereact/password';
 import { Button } from 'primereact/button';
 import { useNavigate } from "react-router-dom";
+import PersonService from "../../service/PersonService";
 
 const Login = () => {
 
     const [user, setUser] = useState({ email: "", password: "" });
     const {t} = useTranslation();
     const navigate = useNavigate();
-
+    const personService = new PersonService();
     const handleChange = (input) => {
         setUser({ ...user, [input.target.name]: input.target.value });
     }
+    const [errorMessage, setErrorMessage] = useState("");
 
     const header = (
         <img alt="Card" src="/images/img-login.png" />
     );
 
-    const login = () => {
-        if (user.email == "admin" && user.password == "admin") {
-            let token = "token do backend";
-            localStorage.setItem("token", token);
+    const login = async () => {
+        try {
+            const response = await personService.login(user);
+            
+            localStorage.setItem("token", response);
             localStorage.setItem("email", user.email);
-            localStorage.setItem("password", user.password);
+            //localStorage.setItem("password", user.password);
             navigate('/profile');
-        } else {
-            alert("Usuário ou senha inseridos estão incorretos");
+        } catch (err){
+            if (err.response && err.response.status === 401) {
+                setErrorMessage(t("error.incorrectPassword"));
+            } else if (err.response && err.response.status === 404) {
+                setErrorMessage(t("error.emailNotRegistered"));
+            } else {
+                setErrorMessage(t("error.generalError"));
+            }
         }
     }
 

@@ -6,26 +6,46 @@ import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
 import { useTranslation } from 'react-i18next';
+import { Divider } from 'primereact/divider';
+import { InputMask } from 'primereact/inputmask';
+import { cpf } from 'cpf-cnpj-validator';
 
 const Profile = () => {
-    
+
     const [user, setUser] = useState({
         name: '',
         rg: '',
         cpf: '',
+        cep: '',
         city: '',
         country: '',
         phone: '',
         email: ''
     });
 
-    const {t} = useTranslation();
+    const handleChangeCEP = async (e) => {
+        const cep = e.target.value.replace(/\D/g, '');
+        if (cep.length === 8) {
+            const response = await fetch(`https://opencep.com/v1/${cep}`);
+            const data = await response.json();
+            if (data) {
+                cityRef.current.value = data.localidade;
+            } else {
+                alert('CEP não encontrado');
+            }
+        }
+    }
+
+    const { t } = useTranslation();
 
     const [visible, setVisible] = useState(false);
+
+    const [CEP, setCEP] = useState(false);
 
     const nameRef = useRef(null);
     const rgRef = useRef(null);
     const cpfRef = useRef(null);
+    const cepRef = useRef(null);
     const cityRef = useRef(null);
     const countryRef = useRef(null);
     const phoneRef = useRef(null);
@@ -50,11 +70,12 @@ const Profile = () => {
     }, []);
 
     const saveChanges = () => {
-        
+
         const updatedUser = {
             name: nameRef.current.value,
             rg: rgRef.current.value,
             cpf: cpfRef.current.value,
+            cep: cepRef.current.value,
             city: cityRef.current.value,
             country: countryRef.current.value,
             phone: phoneRef.current.value,
@@ -67,11 +88,22 @@ const Profile = () => {
         localStorage.setItem('userData', JSON.stringify(updatedUser));
     };
 
-
+    const [cpfValue, setCpfValue] = useState(user.cpf);
+    const [cpfError, setCpfError] = useState('');
+    
+    const handleCpfChange = (e) => {
+        const value = e.target.value;
+        setCpfValue(value);
+        if (cpf.isValid(value)) {
+            setCpfError('');
+        } else {
+            setCpfError('CPF inválido');
+        }
+    };
 
     const footerContent = (
         <div>
-            <Button label={t('button.cancel')}icon="pi pi-times" onClick={() => setVisible(false)} className="p-button-text" />
+            <Button label={t('button.cancel')} icon="pi pi-times" onClick={() => setVisible(false)} className="p-button-text" />
             <Button label={t('button.confirm')} icon="pi pi-check" onClick={saveChanges} autoFocus />
         </div>
     );
@@ -93,9 +125,11 @@ const Profile = () => {
                                     <h2>{t('cpf')}: {user.cpf}</h2>
                                 </div>
                             </div>
+                            <Divider layout="vertical" />
                             <div class='col'>
                                 <div className={style.dataContainer}>
                                     <h1>{t('address')}</h1>
+                                    <h2>{t('cep')}: {user.cep}</h2>
                                     <h2>{t('city')}: {user.city}</h2>
                                     <h2>{t('country')}: {user.country}</h2>
                                     <h2>{t('phone')}: {user.phone}</h2>
@@ -110,20 +144,20 @@ const Profile = () => {
                             <div className='col'>
                                 <InputText className={style.field} defaultValue={user.name} ref={nameRef} placeholder="Nome" />
                                 <InputText className={style.field} defaultValue={user.rg} ref={rgRef} placeholder="RG" />
-                                <InputText className={style.field} defaultValue={user.cpf} ref={cpfRef} placeholder="CPF" />
+                                <InputMask className={style.field} defaultValue={user.cpf} ref={cpfRef} mask="999.999.999-99" placeholder="CPF" /> <p></p>
+                                {cpfError && <small className="p-error">{cpfError}</small>}
                             </div>
                             <div className='col'>
+                                <InputText className={style.field} defaultValue={user.cep} ref={cepRef} mask="99999-999" placeholder={t('cep')} id="cep" onChange={(e) => { setCEP(e.target.value); handleChangeCEP(e) }} />
                                 <InputText className={style.field} defaultValue={user.city} ref={cityRef} placeholder="Cidade" />
                                 <InputText className={style.field} defaultValue={user.country} ref={countryRef} placeholder="País" />
-                                <InputText className={style.field} defaultValue={user.phone} ref={phoneRef} placeholder="Telefone" />
+                                <InputMask className={style.field} defaultValue={user.phone} ref={phoneRef} mask="(99)99999-9999" placeholder="Telefone" />
                                 <InputText className={style.field} defaultValue={user.email} ref={emailRef} placeholder="E-mail" />
                             </div>
                         </div>
                     </Dialog>
                 </div>
             </Card>
-
-
         </div> //Deve haver apenas 1 bloco de código
     );
 }
